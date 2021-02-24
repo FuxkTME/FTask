@@ -171,6 +171,7 @@ jobs:
         
       - name: "部署到腾讯云函数"
         run: |
+          mv ./master/myfile.zip ./myfile.zip
           cd master
           node tencentscf.js
         env:
