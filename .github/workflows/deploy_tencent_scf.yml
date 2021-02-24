@@ -102,6 +102,7 @@ jobs:
 
       - name: "将Secrets里面配置的变量添加到severless.yml里面作为环境变量"
         run: |
+          cd master
           if [ $JD_COOKIE ]; then sed -i "/variables/a\      JD_COOKIE: $JD_COOKIE" serverless.yml; fi;
           if [ $JD_DEBUG ]; then sed -i "/variables/a\      JD_DEBUG: $JD_DEBUG" serverless.yml; fi;
           if [ $JD_USER_AGENT ]; then sed -i "/variables/a\      JD_USER_AGENT: $JD_USER_AGENT" serverless.yml; fi;
@@ -165,10 +166,12 @@ jobs:
           env
 
       - name: "压缩文件夹"
-        run: zip -r myfile.zip ./*
+        run: zip -r myfile.zip ./master/*
         
       - name: "部署到腾讯云函数"
-        run: node tencentscf.js
+        run:
+          cd master
+          node tencentscf.js
         env:
           STAGE: dev
           SERVERLESS_PLATFORM_VENDOR: tencent
@@ -178,4 +181,6 @@ jobs:
           TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
         
       - name: "部署失败通知"
-        run: node action.js
+        run:
+          cd master
+          node action.js
