@@ -79,6 +79,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          
       - name: Prepare
         run: |
            mkdir -p ~/.ssh
@@ -89,9 +90,10 @@ jobs:
       - name: Clone Master
         run: |
           git clone -b master git@gitee.com:lxk0301/jd_scripts.git master
-          cd ./master
+          
       - name: "安装依赖"
         run: |
+          ls
           npm install
           npm install tencentcloud-sdk-nodejs
           npm install got
