@@ -81,6 +81,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - uses : alexrogalskiy/github-action-branch-mapper@master
+        with :
+         github-ref : ${{ github.ref }}
+         map : " { \" master \"  , \" .* \"  } "
           
       - name: Prepare
         run: |
@@ -91,11 +95,11 @@ jobs:
 
       - name: Clone Master
         run: |
-          git clone -b master git@gitee.com:lxk0301/jd_scripts.git master
+          #git clone -b master git@gitee.com:lxk0301/jd_scripts.git master
           
       - name: "安装依赖"
         run: |
-          cd master
+          #cd master
           npm install
           npm install tencentcloud-sdk-nodejs
           npm install got
