@@ -93,7 +93,7 @@ jobs:
           
       - name: "安装依赖"
         run: |
-          ls
+          cd ~/master
           npm install
           npm install tencentcloud-sdk-nodejs
           npm install got
