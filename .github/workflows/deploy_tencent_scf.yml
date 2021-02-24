@@ -84,7 +84,7 @@ jobs:
       - uses : alexrogalskiy/github-action-branch-mapper@master
         with :
          github-ref : ${{ github.ref }}
-         map : " { \" master \"  , \" .* \"  } "
+         map : " { \" master \":\" .* \"  } "
           
       - name: Prepare
         run: |
