@@ -169,7 +169,7 @@ jobs:
         run: zip -r myfile.zip ./master/*
         
       - name: "部署到腾讯云函数"
-        run:
+        run: |
           cd master
           node tencentscf.js
         env:
@@ -181,6 +181,6 @@ jobs:
           TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
         
       - name: "部署失败通知"
-        run:
+        run: |
           cd master
           node action.js
