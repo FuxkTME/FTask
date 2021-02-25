@@ -12,6 +12,12 @@ jobs:
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
+    - name: Prepare
+      run: |
+        mkdir -p ~/.ssh
+        echo -e "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan gitee.com > ~/.ssh/known_hosts
     - name: repo-sync
       uses: repo-sync/github-sync@v2
       with:
@@ -19,4 +25,3 @@ jobs:
         source_branch: "master"
         destination_branch: "master"
         github_token: ${{ secrets.PAT }}
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
