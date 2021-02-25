@@ -12,19 +12,8 @@ jobs:
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
-    - name: Prepare
-      run: |
-        mkdir --parents /root/.ssh
-        echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
-        chmod 600 /root/.ssh/id_rsa
-
-        # Github action changes $HOME to /github at runtime
-        # therefore we always copy the SSH key to $HOME (aka. ~)
-        mkdir --parents ~/.ssh
-        cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
-        ssh-keyscan gitee.com > ~/.ssh/known_hosts
-    - name: repo-sync
-      uses: repo-sync/github-sync@v2
+    - name: GitHub Repo Sync
+      uses: repo-sync/github-sync@v2.3.0
       with:
         source_repo: "git@gitee.com:lxk0301/jd_scripts.git"
         source_branch: "master"
