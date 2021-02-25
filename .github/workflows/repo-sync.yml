@@ -12,13 +12,12 @@ jobs:
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
-        access_token: ${{ secrets.PAT }}
     - name: GitHub Repo Sync
       uses: repo-sync/github-sync@v2.3.0
       env:
          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       with:
-        source_repo: "https://FuxkTME:${access_token}@github.com/FuxkTME/repository.git"
+        source_repo: "git@gitee.com:lxk0301/jd_scripts.git"
         source_branch: "master"
-        destination_branch: "tencent"
+        destination_branch: "master"
         github_token: ${{ secrets.PAT }}
