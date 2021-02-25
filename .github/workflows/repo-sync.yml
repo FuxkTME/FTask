@@ -19,4 +19,4 @@ jobs:
         source_branch: "master"
         destination_branch: "master"
         github_token: ${{ secrets.PAT }}
-        ssh_privatekey: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
