@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.repository.owner.id == github.event.sender.id && github.repository == 'FUXKTME/jd_scripts' }}
     steps:
+    - name: GitHub Repo Sync
+      uses: repo-sync/github-sync@v2.3.0
     - uses: actions/checkout@v2
       with:
         persist-credentials: false
