@@ -14,9 +14,14 @@ jobs:
         persist-credentials: false
     - name: Prepare
       run: |
-        mkdir -p ~/.ssh
-        echo -e "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
+        mkdir --parents /root/.ssh
+        echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa
+        chmod 600 /root/.ssh/id_rsa
+
+        # Github action changes $HOME to /github at runtime
+        # therefore we always copy the SSH key to $HOME (aka. ~)
+        mkdir --parents ~/.ssh
+        cp /root/.ssh/* ~/.ssh/ 2> /dev/null || true
         ssh-keyscan gitee.com > ~/.ssh/known_hosts
     - name: repo-sync
       uses: repo-sync/github-sync@v2
