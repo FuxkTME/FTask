@@ -19,6 +19,6 @@ jobs:
          #SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       with:
         source_repo: "https://github.com/zero205/JD.git"
-        source_branch: "master"
+        source_branch: "main"
         destination_branch: "master"
         github_token: ${{ secrets.PAT }}
